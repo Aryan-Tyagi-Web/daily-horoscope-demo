@@ -57,9 +57,14 @@ header p{
 }
 
 .zodiac-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
     gap:20px;
+}
+
+.zodiac-card{
+    width:150px;
 }
 
 .zodiac-card{
@@ -116,9 +121,14 @@ header p{
 }
 
 .info-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
     gap:20px;
+}
+
+.info-box{
+    width:180px;
 }
 
 .info-box{
