@@ -1,47 +1,75 @@
 const cards = document.querySelectorAll(".zodiac-card");
+const tabs = document.querySelectorAll(".tab");
 
-cards.forEach(card => {
+let currentSign = "aries";
+let currentType = "daily";
 
-    card.addEventListener("click", async () => {
+async function loadHoroscope(sign, type){
 
-        const sign = card.dataset.sign;
+    currentSign = sign;
 
-        document.getElementById("signTitle").innerHTML = "Loading...";
+    currentType = type;
 
-        document.getElementById("prediction").innerHTML = "Fetching today's horoscope...";
+    document.getElementById("signTitle").innerHTML="Loading...";
 
-        try{
+    document.getElementById("prediction").innerHTML="Fetching Horoscope...";
 
-            const response = await fetch(`https://freehoroscopeapi.com/api/v1/get-horoscope/daily?sign=${sign}`);
+    if(type==="year"){
 
-            const result = await response.json();
+        document.getElementById("signTitle").innerHTML=sign.toUpperCase();
 
-            document.getElementById("signTitle").innerHTML = result.data.sign;
+        document.getElementById("prediction").innerHTML="Yearly Horoscope will be available in Premium API.";
 
-            document.getElementById("prediction").innerHTML = result.data.horoscope;
+        return;
 
-            document.getElementById("love").innerHTML = "Coming Soon";
+    }
 
-            document.getElementById("career").innerHTML = "Coming Soon";
+    try{
 
-            document.getElementById("health").innerHTML = "Coming Soon";
+        const url=`https://freehoroscopeapi.com/api/v1/get-horoscope/${type}?sign=${sign}`;
 
-            document.getElementById("color").innerHTML = "--";
+        const response=await fetch(url);
 
-            document.getElementById("number").innerHTML = "--";
+        const result=await response.json();
 
-            document.getElementById("mood").innerHTML = "Positive";
+        document.getElementById("signTitle").innerHTML=result.data.sign+" ("+result.data.period+")";
 
-        }
+        document.getElementById("prediction").innerHTML=result.data.horoscope;
 
-        catch(error){
+    }
 
-            document.getElementById("signTitle").innerHTML="Error";
+    catch(error){
 
-            document.getElementById("prediction").innerHTML="Unable to load horoscope.";
+        document.getElementById("signTitle").innerHTML="Error";
 
-        }
+        document.getElementById("prediction").innerHTML="Unable to fetch horoscope.";
+
+    }
+
+}
+
+cards.forEach(card=>{
+
+    card.addEventListener("click",()=>{
+
+        loadHoroscope(card.dataset.sign,currentType);
 
     });
 
 });
+
+tabs.forEach(tab=>{
+
+    tab.addEventListener("click",()=>{
+
+        tabs.forEach(t=>t.classList.remove("active"));
+
+        tab.classList.add("active");
+
+        loadHoroscope(currentSign,tab.dataset.type);
+
+    });
+
+});
+
+loadHoroscope("aries","daily");
