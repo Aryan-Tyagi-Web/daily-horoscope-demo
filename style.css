@@ -157,3 +157,35 @@ header h1{
 }
 
 }
+
+
+.tabs{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
+
+.tab{
+    padding:12px 24px;
+    border:none;
+    border-radius:30px;
+    background:#1d2745;
+    color:#fff;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+    border:1px solid rgba(255,255,255,.12);
+}
+
+.tab:hover{
+    background:#ffd86b;
+    color:#111;
+}
+
+.tab.active{
+    background:#ffd86b;
+    color:#111;
+    font-weight:600;
+}
