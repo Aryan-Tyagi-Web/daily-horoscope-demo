@@ -438,3 +438,45 @@ footer{
     }
 
 }
+
+.language-switch{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    margin:25px 0 10px;
+
+}
+
+.lang-btn{
+
+    padding:10px 22px;
+
+    border:none;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+    background:#1d2745;
+
+    color:#fff;
+
+    transition:.3s;
+
+    border:1px solid rgba(255,255,255,.12);
+
+}
+
+.lang-btn.active{
+
+    background:#FFD166;
+
+    color:#111;
+
+    font-weight:600;
+
+}
