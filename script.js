@@ -10,7 +10,10 @@ async function loadHoroscope(sign, type){
     currentType = type;
 
     document.getElementById("signTitle").innerHTML="Loading...";
-    document.getElementById("prediction").innerHTML="Fetching Horoscope...";
+    document.getElementById("prediction").innerHTML=`
+<div class="loader"></div>
+<p style="margin-top:15px;">Loading Horoscope...</p>
+`;
 
     try{
 
