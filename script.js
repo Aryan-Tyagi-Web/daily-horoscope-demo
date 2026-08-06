@@ -74,4 +74,6 @@ tabs.forEach(tab=>{
 
 });
 
+document.querySelector('[data-sign="aries"]').classList.add("active");
+
 loadHoroscope("aries","daily");
