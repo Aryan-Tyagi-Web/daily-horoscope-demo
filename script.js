@@ -4,6 +4,34 @@ const tabs = document.querySelectorAll(".tab");
 let currentSign = "aries";
 let currentType = "daily";
 
+function updateDateTime(){
+
+    const now=new Date();
+
+    document.getElementById("todayDate").innerHTML=
+
+    "📅 "+now.toLocaleDateString("en-IN",{
+
+        day:"numeric",
+
+        month:"long",
+
+        year:"numeric"
+
+    });
+
+    document.getElementById("lastUpdated").innerHTML=
+
+    "🕒 Updated "+now.toLocaleTimeString("en-IN",{
+
+        hour:"2-digit",
+
+        minute:"2-digit"
+
+    });
+
+}
+
 async function loadHoroscope(sign, type){
 
     currentSign = sign;
@@ -24,6 +52,8 @@ async function loadHoroscope(sign, type){
         document.getElementById("signTitle").innerHTML=result.data.sign;
 
         document.getElementById("prediction").innerHTML=result.data.horoscope;
+
+        updateDateTime();
 
         document.getElementById("love").innerHTML="Available in Premium";
 
