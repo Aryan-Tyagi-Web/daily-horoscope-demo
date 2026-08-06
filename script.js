@@ -39,8 +39,17 @@ async function loadHoroscope(sign, type){
 
     document.getElementById("signTitle").innerHTML="Loading...";
     document.getElementById("prediction").innerHTML=`
-<div class="loader"></div>
-<p style="margin-top:15px;">Loading Horoscope...</p>
+
+<div class="skeleton">
+
+<div class="skeleton-line"></div>
+
+<div class="skeleton-line"></div>
+
+<div class="skeleton-line"></div>
+
+</div>
+
 `;
 
     try{
