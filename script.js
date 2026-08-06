@@ -44,15 +44,35 @@ async function loadHoroscope(sign, type){
 
 }
 
-cards.forEach(card=>{
+cards.forEach(card => {
 
-    card.addEventListener("click",()=>{
+    card.addEventListener("click", () => {
 
-        cards.forEach(c=>c.classList.remove("active"));
+        // Agar wahi card dobara click hua
+        if (card.classList.contains("active")) {
+
+            card.classList.remove("active");
+
+            document.getElementById("signTitle").innerHTML = "Choose Your Zodiac";
+
+            document.getElementById("prediction").innerHTML =
+                "Click on any zodiac sign above to load today's horoscope.";
+
+            document.getElementById("love").innerHTML = "--";
+            document.getElementById("career").innerHTML = "--";
+            document.getElementById("health").innerHTML = "--";
+            document.getElementById("color").innerHTML = "--";
+            document.getElementById("number").innerHTML = "--";
+            document.getElementById("mood").innerHTML = "--";
+
+            return;
+        }
+
+        cards.forEach(c => c.classList.remove("active"));
 
         card.classList.add("active");
 
-        loadHoroscope(card.dataset.sign,currentType);
+        loadHoroscope(card.dataset.sign, currentType);
 
     });
 
@@ -73,7 +93,3 @@ tabs.forEach(tab=>{
     });
 
 });
-
-document.querySelector('[data-sign="aries"]').classList.add("active");
-
-loadHoroscope("aries","daily");
