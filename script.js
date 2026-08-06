@@ -7,40 +7,36 @@ let currentType = "daily";
 async function loadHoroscope(sign, type){
 
     currentSign = sign;
-
     currentType = type;
 
     document.getElementById("signTitle").innerHTML="Loading...";
-
     document.getElementById("prediction").innerHTML="Fetching Horoscope...";
-
-    if(type==="year"){
-
-        document.getElementById("signTitle").innerHTML=sign.toUpperCase();
-
-        document.getElementById("prediction").innerHTML="Yearly Horoscope will be available in Premium API.";
-
-        return;
-
-    }
 
     try{
 
-        const url=`https://freehoroscopeapi.com/api/v1/get-horoscope/${type}?sign=${sign}`;
+        const response = await fetch(`https://horoscope-api-demo.tyagiaryannda.workers.dev/?sign=${sign}&type=${type}`);
 
-        const response=await fetch(url);
+        const result = await response.json();
 
-        const result=await response.json();
-
-        document.getElementById("signTitle").innerHTML=result.data.sign+" ("+result.data.period+")";
+        document.getElementById("signTitle").innerHTML=result.data.sign;
 
         document.getElementById("prediction").innerHTML=result.data.horoscope;
 
+        document.getElementById("love").innerHTML="Available in Premium";
+
+        document.getElementById("career").innerHTML="Available in Premium";
+
+        document.getElementById("health").innerHTML="Available in Premium";
+
+        document.getElementById("color").innerHTML="--";
+
+        document.getElementById("number").innerHTML="--";
+
+        document.getElementById("mood").innerHTML=result.data.period;
+
     }
 
-    catch(error){
-
-        document.getElementById("signTitle").innerHTML="Error";
+    catch(e){
 
         document.getElementById("prediction").innerHTML="Unable to fetch horoscope.";
 
@@ -66,7 +62,9 @@ tabs.forEach(tab=>{
 
         tab.classList.add("active");
 
-        loadHoroscope(currentSign,tab.dataset.type);
+        currentType=tab.dataset.type;
+
+        loadHoroscope(currentSign,currentType);
 
     });
 
